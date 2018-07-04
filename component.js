@@ -2,26 +2,42 @@ var React = require('react');
 
 
 
-
-class ProfilePic extends React.Component{
-    render(){
+const ProfileList = ({number, onProfileSelect}) => {
+    const Profiles = number.map(() => {
         return(
-            <div className='profilePic'>
-                this will return the profile pic
-            </div>
+            <ProfileListItem
+                number={props.number}
+                onProfileSelect={onProfileSelect}/>
         )
-    }
-}
+    });
+    return (
+        <ul>
+            {Profiles}
+        </ul>
+    );
+};
 
-class Profile extends React.Component{
-    render(){
-        return(
-         <div className='profile'>
-             this is the Profile Component
-             <ProfilePic/>
-         </div>
-        )
-    }
-}
+const ProfileListItem = ({number, onProfileSelect}) => {
+    return (
+        <li onClick={() => onProfileSelect(number)}>
+            <p>Profile {number}</p>
+        </li>
+    )
+};
 
-module.exports = Profile;
+
+const Profile = ({profile}) => {
+    if(!profile){
+        return <div>Loading...</div>
+    }
+    return(
+        <ul>
+            <p>This is Profile {profile.number}</p>
+        </ul>
+    )
+
+};
+
+
+export default Profile;
+export default ProfileList;
